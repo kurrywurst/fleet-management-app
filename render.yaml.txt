@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: fleet-management-backend
+    env: python
+    buildCommand: "cd fleet-management-backend && pip install -r requirements.txt"
+    startCommand: "cd fleet-management-backend && python src/main.py"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: FLASK_ENV
+        value: production

@@ -13,11 +13,37 @@ from src.routes.auth import auth_bp
 from src.routes.vehicle import vehicle_bp
 from src.routes.location import location_bp
 
-app = Flask(__name__, static_folder=os.path.join(os.path.dirname(__file__), 'static'))
+app = Flask(__name__, static_folder=\'static\', static_url_path=\'\')
 app.config['SECRET_KEY'] = 'asdf#FGSgvasgf$5$WGT'
 
+# Production configuration for Render
+if os.environ.get(\'FLASK_ENV\') == \'production\':
+    # Use Render\'s assigned port
+    port = int(os.environ.get(\'PORT\', 5000))
+    # Ensure database directory exists
+    db_dir = \'/opt/render/project/src/database\'
+    os.makedirs(db_dir, exist_ok=True)
+    app.config[\'SQLALCHEMY_DATABASE_URI\'] = f\'sqlite:///{db_dir}/app.db\'
+else:
+    # Local development configuration
+    port = 5000
+    app.config[\'SQLALCHEMY_DATABASE_URI\'] = \'sqlite:///database/app.db\'
+
+
 # Enable CORS for all routes
-CORS(app, supports_credentials=True)
+CORS(app, origins=\'*\')
+# Your existing configuration and routes...
+
+if __name__ == \'__main__\':
+    with app.app_context():
+        db.create_all()
+    
+    # Production vs development server configuration
+    if os.environ.get(\'FLASK_ENV\') == \'production\':
+        app.run(host=\'0.0.0.0\', port=port)
+    else:
+        app.run(host=\'0.0.0.0\', port=port, debug=True)
+
 
 # Register blueprints
 app.register_blueprint(user_bp, url_prefix='/api')
