@@ -1,3 +1,8 @@
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+
+// Beispiel eines API-Aufrufs
+// const response = await fetch(`${API_BASE_URL}/api/vehicles` );
+
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'

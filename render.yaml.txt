@@ -9,3 +9,12 @@ services:
         value: 3.11.0
       - key: FLASK_ENV
         value: production
+
+  - type: web
+    name: fleet-management-frontend
+    env: node
+    buildCommand: "cd fleet-management-frontend && pnpm install && pnpm run build"
+    startCommand: "cd fleet-management-frontend && pnpm run preview"
+    envVars:
+      - key: NODE_VERSION
+        value: 20
