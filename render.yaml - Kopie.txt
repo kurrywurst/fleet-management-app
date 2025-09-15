@@ -2,8 +2,7 @@ services:
   - type: web
     name: fleet-management-backend
     env: python
-    # command to force reinstalling dependencies every time
-    buildCommand: "cd fleet-management-backend && pip install --no-cache-dir -r requirements.txt"
+    buildCommand: "cd fleet-management-backend && pip install -r requirements.txt"
     startCommand: "cd fleet-management-backend && python src/main.py"
     envVars:
       - key: PYTHON_VERSION
