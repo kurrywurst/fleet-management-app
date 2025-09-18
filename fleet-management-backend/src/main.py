@@ -13,7 +13,7 @@ from src.routes.auth import auth_bp
 from src.routes.vehicle import vehicle_bp
 from src.routes.location import location_bp
 
-app = Flask(__name__, static_folder=\'static\', static_url_path=\'\')
+app = Flask(__name__, static_folder='static', static_url_path='')
 app.config['SECRET_KEY'] = 'asdf#FGSgvasgf$5$WGT'
 
 # Production configuration for Render
@@ -23,15 +23,15 @@ if os.environ.get(\'FLASK_ENV\') == \'production\':
     # Ensure database directory exists
     db_dir = \'/opt/render/project/src/database\'
     os.makedirs(db_dir, exist_ok=True)
-    app.config[\'SQLALCHEMY_DATABASE_URI\'] = f\'sqlite:///{db_dir}/app.db\'
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_dir}/app.db'
 else:
     # Local development configuration
     port = 5000
-    app.config[\'SQLALCHEMY_DATABASE_URI\'] = \'sqlite:///database/app.db\'
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_dir}/app.db'
 
 
 # Enable CORS for all routes
-CORS(app, origins=\'*\')
+CORS(app, origins="*") # oder CORS(app, origins=['http://localhost:5173', 'https://your-frontend-url.onrender.com']
 # Your existing configuration and routes...
 
 if __name__ == \'__main__\':
