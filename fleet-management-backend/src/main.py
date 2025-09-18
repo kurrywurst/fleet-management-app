@@ -17,11 +17,11 @@ app = Flask(__name__, static_folder='static', static_url_path='')
 app.config['SECRET_KEY'] = 'asdf#FGSgvasgf$5$WGT'
 
 # Production configuration for Render
-if os.environ.get(\'FLASK_ENV\') == \'production\':
+if os.environ.get('FLASK_ENV') == 'production':
     # Use Render\'s assigned port
-    port = int(os.environ.get(\'PORT\', 5000))
+    port = int(os.environ.get('PORT', 5000))
     # Ensure database directory exists
-    db_dir = \'/opt/render/project/src/database\'
+    db_dir = '/opt/render/project/src/database'
     os.makedirs(db_dir, exist_ok=True)
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_dir}/app.db'
 else:
@@ -34,15 +34,15 @@ else:
 CORS(app, origins="*") # oder CORS(app, origins=['http://localhost:5173', 'https://your-frontend-url.onrender.com']
 # Your existing configuration and routes...
 
-if __name__ == \'__main__\':
+if __name__ == '__main__':
     with app.app_context():
         db.create_all()
     
     # Production vs development server configuration
-    if os.environ.get(\'FLASK_ENV\') == \'production\':
-        app.run(host=\'0.0.0.0\', port=port)
+    if os.environ.get('FLASK_ENV') == 'production':
+        app.run(host='0.0.0.0', port=port)
     else:
-        app.run(host=\'0.0.0.0\', port=port, debug=True)
+        app.run(host='0.0.0.0', port=port, debug=True)
 
 
 # Register blueprints
