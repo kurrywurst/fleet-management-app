@@ -1,4 +1,7 @@
 import os
+from flask import Flask, send_from_directory
+from flask_cors import CORS
+from flask_sqlalchemy import SQLAlchemy
 import sys
 # DON'T CHANGE THIS !!!
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
@@ -18,16 +21,16 @@ app.config['SECRET_KEY'] = 'asdf#FGSgvasgf$5$WGT'
 
 # Production configuration for Render
 if os.environ.get('FLASK_ENV') == 'production':
-    # Use Render\'s assigned port
-    port = int(os.environ.get('PORT', 5000))
-    # Ensure database directory exists
-    db_dir = '/opt/render/project/src/database'
-    os.makedirs(db_dir, exist_ok=True)
-    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_dir}/app.db'
+# Use Render's assigned port
+port = int(os.environ.get('PORT', 5000))
+# Ensure database directory exists
+db_dir = '/opt/render/project/src/database'
+os.makedirs(db_dir, exist_ok=True)
+app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_dir}/app.db'
 else:
-    # Local development configuration
-    port = 5000
-    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_dir}/app.db'
+# Local development configuration
+port = 5000
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database/app.db'
 
 
 # Enable CORS for all routes
@@ -39,10 +42,12 @@ if __name__ == '__main__':
         db.create_all()
     
     # Production vs development server configuration
-    if os.environ.get('FLASK_ENV') == 'production':
-        app.run(host='0.0.0.0', port=port)
-    else:
-        app.run(host='0.0.0.0', port=port, debug=True)
+    
+if os.environ.get('FLASK_ENV') == 'production':
+    app.run(host='0.0.0.0', port=port)
+else:
+    app.run(host='0.0.0.0', port=port, debug=True)
+```
 
 
 # Register blueprints
