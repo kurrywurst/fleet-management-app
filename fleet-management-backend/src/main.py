@@ -29,12 +29,12 @@ db.init_app(app)
 CORS(app, origins="*")
 
 # Import models and routes after app and db are defined
-from .models.user import User
-from .models.vehicle import Vehicle
-from .models.location import Location
-from .routes.auth import auth_bp
-from .routes.vehicle import vehicle_bp
-from .routes.location import location_bp
+from models.user import User
+from models.vehicle import Vehicle
+from models.location import Location
+from routes.auth import auth_bp
+from routes.vehicle import vehicle_bp
+from routes.location import location_bp
 
 # Register blueprints
 app.register_blueprint(auth_bp, url_prefix="/api/auth")
