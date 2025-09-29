@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify, session
-from src.models.user import db
-from src.models.vehicle import Vehicle
-from src.models.location import Location
+from models.user import db
+from models.vehicle import Vehicle
+from models.location import Location
 
 location_bp = Blueprint('location', __name__)
 
