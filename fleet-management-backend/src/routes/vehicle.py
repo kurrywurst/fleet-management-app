@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify, session
-from src.models.user import db
-from src.models.vehicle import Vehicle
+from models.user import db
+from models.vehicle import Vehicle
 from datetime import datetime
 import qrcode
 import io
