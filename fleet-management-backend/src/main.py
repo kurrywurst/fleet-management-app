@@ -13,7 +13,7 @@ if os.environ.get("FLASK_ENV") == "production":
     # Use Render's assigned port
     port = int(os.environ.get("PORT", 5000))
     # Ensure database directory exists
-    db_dir = ".database"
+    db_dir = "/opt/render/project/src/.database" 
     # Create the directory if it doesn't exist
     os.makedirs(db_dir, exist_ok=True)
     app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{db_dir}/app.db"
