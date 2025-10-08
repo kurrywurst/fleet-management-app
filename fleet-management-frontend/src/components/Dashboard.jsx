@@ -38,7 +38,7 @@ export default function Dashboard({ user, onLogout }) {
 
   const fetchLocations = async () => {
     try {
-      const response = await fetch('/api/locations', {
+      const response = await fetch('${API_BASE_URL}/api/locations', {
         credentials: 'include',
       })
       if (response.ok) {
