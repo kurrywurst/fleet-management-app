@@ -26,7 +26,10 @@ else:
 db.init_app(app)
 
 # Enable CORS for all routes
-CORS(app, origins="*")
+CORS(app, origins=[
+    "https://fleet-management-frontend-nu5y.onrender.com", # Ihre Frontend-URL
+    "http://localhost:5173" # Für lokale Entwicklung
+] )
 
 # Import models and routes after app and db are defined
 from models.user import User
