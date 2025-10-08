@@ -23,10 +23,19 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:5000',
+        target: 'https://fleet-management-backend-t0q7.onrender.com', 
         changeOrigin: true,
         rewrite: (path ) => path.replace(/^\/api/, '/api'),
       },
     },
+  },
+  preview: { // <--- DIESEN ABSCHNITT HINZUFÜGEN
+    host: true,
+    port: 10000, // Render uses port 10000 for web services
+    strictPort: true,
+    allowedHosts: [
+      'fleet-management-frontend-nu5y.onrender.com', // <--- IHRE FRONTEND-URL HIER EINFÜGEN
+      // Fügen Sie hier weitere Hosts hinzu, falls nötig
+    ],
   },
 })
