@@ -24,7 +24,7 @@ export default function Dashboard({ user, onLogout }) {
 
   const fetchVehicles = async () => {
     try {
-      const response = await fetch('/api/vehicles', {
+      const response = await fetch('${API_BASE_URL}/api/vehicles', {
         credentials: 'include',
       })
       if (response.ok) {

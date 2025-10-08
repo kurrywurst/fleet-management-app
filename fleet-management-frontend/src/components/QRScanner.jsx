@@ -108,7 +108,7 @@ export default function QRScanner({ onScanSuccess }) {
     setMessageType('info')
 
     try {
-      const response = await fetch('/api/scan', {
+      const response = await fetch('${API_BASE_URL}/api/scan', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

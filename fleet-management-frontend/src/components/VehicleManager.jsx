@@ -40,7 +40,7 @@ export default function VehicleManager({ vehicles, onUpdate }) {
     setMessage('')
 
     try {
-      const response = await fetch('/api/vehicles', {
+      const response = await fetch('${API_BASE_URL}/api/vehicles', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -80,7 +80,7 @@ export default function VehicleManager({ vehicles, onUpdate }) {
     }
 
     try {
-      const response = await fetch(`/api/vehicles/${vehicleId}`, {
+      const response = await fetch(`${API_BASE_URL}/api/vehicles/${vehicleId}`, {
         method: 'DELETE',
         credentials: 'include',
       })
@@ -105,7 +105,7 @@ export default function VehicleManager({ vehicles, onUpdate }) {
     setLoading(true)
 
     try {
-      const response = await fetch(`/api/vehicles/${vehicle.id}/qr`, {
+      const response = await fetch(`${API_BASE_URL}/api/vehicles/${vehicle.id}/qr`, {
         credentials: 'include',
       })
 
