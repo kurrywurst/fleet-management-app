@@ -4,6 +4,7 @@ import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: '/', // <--- DIESE ZEILE HINZUFÜGEN
   plugins: [react( )],
   resolve: {
     alias: {
@@ -23,19 +24,18 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://fleet-management-backend-t0q7.onrender.com', 
+        target: 'https://fleet-management-backend-t0q7.onrender.com',
         changeOrigin: true,
         rewrite: (path ) => path.replace(/^\/api/, '/api'),
       },
     },
   },
-  preview: { // <--- DIESEN ABSCHNITT HINZUFÜGEN
+  preview: {
     host: true,
-    port: 10000, // Render uses port 10000 for web services
+    port: 10000,
     strictPort: true,
     allowedHosts: [
-      'fleet-management-frontend-nu5y.onrender.com', // <--- IHRE FRONTEND-URL HIER EINFÜGEN
-      // Fügen Sie hier weitere Hosts hinzu, falls nötig
+      'fleet-management-frontend-nu5y.onrender.com',
     ],
   },
 })
